@@ -1,7 +1,9 @@
+//Program to print Hello, World!
 #include <stdio.h>
+#define ZERO 0
 
 int main() 
 {
     printf("Hello, World!\n");
-    return 0;
+    return ZERO;
 }
