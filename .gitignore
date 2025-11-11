@@ -1,0 +1,5 @@
+    # Ignore compiled executables
+    *.exe
+    a.out
+    *.o
+    *.obj
