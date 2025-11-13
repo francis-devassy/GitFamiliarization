@@ -27,6 +27,7 @@
 #define OFFSET_MINUTES_PST 0
 #define LABEL_IST "IST (+5:30)"
 #define LABEL_PST "PST (-8:00)"
+#define WAIT_TIME 1
 
 //***************************** Local Variables *******************************
 
@@ -57,7 +58,7 @@ int main(void)
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, LABEL_PST);
 
         // Refresh every second
-        sleep(1); 
+        sleep(WAIT_TIME); 
     }
 
     return RETURN_ZERO;
