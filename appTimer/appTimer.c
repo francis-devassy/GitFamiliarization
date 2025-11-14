@@ -1,5 +1,5 @@
 //**************************** PROJECT DISPLAY SYSTEM TIME ********************
-//  Copyright (c) 202 Trenser Technology Solutions 
+//  Copyright (c) 2025 Trenser Technology Solutions 
 //  All Rights Reserved 
 //***************************************************************************** 
 // 
@@ -12,12 +12,12 @@
 //***************************************************************************** 
  
 //******************************* Include Files ******************************* 
-#include "appTimer.h"
-#include "customTypes.h"
 #include <stdbool.h> 
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+#include "appTimer.h"
+#include "customTypes.h"
 //******************************* Local Types ********************************* 
 #define MAX_TIMESTRING_SIZE (20)
 #define MAX_DATESTRING_SIZE (20)
@@ -49,14 +49,13 @@ bool appTimerPrintTimeZone(int32 lRawTime,
     bool blReturnValue = false;
 
     // Validate arguments
-    if (!(lRawTime <= 0 ||
+    if (!(lRawTime <= 0 || 
         pucLabel == NULL ||
         lOffsetHours < -12 ||
         lOffsetHours > 14 ||
         ulOffsetMinutes < 0 ||
         ulOffsetMinutes > 59))
     {
-
         // Adjust time by offset
         lRawTime += lOffsetHours * 3600 + ulOffsetMinutes * 60;
 
@@ -93,10 +92,9 @@ bool appTimerPrintTimeZone(int32 lRawTime,
 
         blReturnValue = true;
 
-    }     
-    
-    return blReturnValue;
+    }
 
+    return blReturnValue;
 }
 
 //******************************.FUNCTION_HEADER.******************************
@@ -110,39 +108,31 @@ bool appTimerPrintUtcTime(int32 lRawTime)
 {
     char pucTimeStr[MAX_TIMESTRING_SIZE] = { 0 };
     char pucDateStr[MAX_DATESTRING_SIZE] = { 0 };
-
     bool blReturnValue = false;
-    
+    struct tm* psUtcTimeInfo = NULL;
+
     // Validate raw time
     if (!(lRawTime <= 0)) 
     {
         // Convert to UTC time 
-        struct tm* psUtcTimeInfo = gmtime(&lRawTime);
-
+        psUtcTimeInfo = gmtime(&lRawTime);
         // Format time and date
         strftime(pucTimeStr,
                 sizeof(pucTimeStr),
                 "%I:%M:%S %p",
                 psUtcTimeInfo);
-
         strftime(pucDateStr,
                 sizeof(pucDateStr),
                 "%d/%m/%Y",
                 psUtcTimeInfo);
-
         // Print results
         printf("UTC (0:00)\n");
         printf("---------------------------\n");
         printf("Time : %s\n", pucTimeStr);
         printf("Date : %s\n", pucDateStr);
         printf("Epoch: %ld\n\n", (long)lRawTime);
-
-        blReturnValue = true;
-        
+        blReturnValue = true;        
     }
-
-    
-
     return blReturnValue;
 }
 

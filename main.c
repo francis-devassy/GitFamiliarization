@@ -4,8 +4,8 @@
 //*****************************************************************************
 //
 // File    : main.c
-// Summary : Program to print Hello World and System Time
-// Note    : Program to print Hello World and System Time
+// Summary : Program to prints the message Hello World and System Time
+// Note    : Program to prints the message Hello World and System Time
 // Author  : Francis V D
 // Date    : 13-11-2025
 //
@@ -20,14 +20,13 @@
 //******************************* Local Types *********************************
 
 //***************************** Local Constants *******************************
-#define RETURN_ZERO             (0)
 #define OFFSET_HOURS_IST        (5)
 #define OFFSET_MINUTES_IST      (30)
 #define OFFSET_HOURS_PST        (-8)
 #define OFFSET_MINUTES_PST      (0)
+#define WAIT_TIME               (1)
 #define LABEL_IST               "IST (+5:30)"
 #define LABEL_PST               "PST (-8:00)"
-#define WAIT_TIME               (1)
 
 //***************************** Local Variables *******************************
 
@@ -48,19 +47,14 @@ int main(void)
 
     while (1) 
     {
-        time(&lRawTime);    
-
+        time(&lRawTime); 
         // Print time
-        appTimerPrintUtcTime(lRawTime);
-        
-        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, LABEL_IST);
-        
+        appTimerPrintUtcTime(lRawTime);        
+        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, LABEL_IST);        
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, LABEL_PST);
-
         // Refresh every second
         sleep(WAIT_TIME); 
     }
-
-    return RETURN_ZERO;
+    return 0;
 }
 // EOF

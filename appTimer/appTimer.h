@@ -13,8 +13,9 @@
 
 //******************************* Include Files ******************************* 
 #include "customTypes.h"
-#include <time.h> 
+#include <time.h>
 #include <stdbool.h>
+
 //******************************* Global Types ******************************** 
  
 //***************************** Global Constants ****************************** 
@@ -30,8 +31,6 @@ bool appTimerPrintTimeZone(int32 lRawTime,
 
 // Function to display UTC time with epoch
 bool appTimerPrintUtcTime(int32 lRawTime);
-
-//*********************** Inline Method Implementations *********************** 
 
 #endif // _APPTIMER_H_
 // EOF 
