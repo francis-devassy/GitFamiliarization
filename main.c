@@ -20,14 +20,14 @@
 //******************************* Local Types *********************************
 
 //***************************** Local Constants *******************************
-#define RETURN_ZERO 0
-#define OFFSET_HOURS_IST   5
-#define OFFSET_MINUTES_IST 30
-#define OFFSET_HOURS_PST  -8
-#define OFFSET_MINUTES_PST 0
-#define LABEL_IST "IST (+5:30)"
-#define LABEL_PST "PST (-8:00)"
-#define WAIT_TIME 1
+#define RETURN_ZERO             (0)
+#define OFFSET_HOURS_IST        (5)
+#define OFFSET_MINUTES_IST      (30)
+#define OFFSET_HOURS_PST        (-8)
+#define OFFSET_MINUTES_PST      (0)
+#define LABEL_IST               "IST (+5:30)"
+#define LABEL_PST               "PST (-8:00)"
+#define WAIT_TIME               (1)
 
 //***************************** Local Variables *******************************
 
@@ -42,19 +42,19 @@
 //********************************************************************************** 
 int main(void) 
 {
-    
     time_t lRawTime = 0;
+
     printf(" Hello, World!\n");
 
     while (1) 
     {
         time(&lRawTime);    
 
-        // Print UTC with epoch
+        // Print time
         appTimerPrintUtcTime(lRawTime);
-        // // Print IST (+5:30)
+        
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, LABEL_IST);
-        // Print PST (-8:00)
+        
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, LABEL_PST);
 
         // Refresh every second
