@@ -42,7 +42,6 @@
 int main(void) 
 {
     time_t lRawTime = 0;
-
     printf(" Hello, World!\n");
 
     while (1) 
@@ -50,11 +49,13 @@ int main(void)
         time(&lRawTime); 
         // Print time
         appTimerPrintUtcTime(lRawTime);        
-        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, LABEL_IST);        
-        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, LABEL_PST);
+        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, 
+                              (const uint8*)LABEL_IST);        
+        appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, 
+                              (const uint8*)LABEL_PST);
         // Refresh every second
         sleep(WAIT_TIME); 
     }
     return 0;
 }
-// EOF
+// EOF 

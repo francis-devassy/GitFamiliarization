@@ -58,7 +58,6 @@ bool appTimerPrintTimeZone(int32 lRawTime,
     {
         // Adjust time by offset
         lRawTime += lOffsetHours * 3600 + ulOffsetMinutes * 60;
-
         // Convert the adjusted raw time (epoch seconds) into a UTC time structure.
         // gmtime() returns a pointer to a statically allocated struct tm.
         struct tm* psTimeInfo = gmtime(&lRawTime); 
@@ -68,30 +67,25 @@ bool appTimerPrintTimeZone(int32 lRawTime,
         // - sizeof(pucTimeStr): maximum size of buffer
         // - "%I:%M:%S %p": format string (12-hour clock with AM/PM)
         // - psTimeInfo: pointer to the struct tm containing UTC time    
-        strftime(pucTimeStr,
+        strftime((char *)pucTimeStr,
                     sizeof(pucTimeStr),
                     "%I:%M:%S %p", 
                     psTimeInfo);
-
         // Format the date portion (day/month/year) into a string.
         // - pucDateStr: destination buffer
         // - sizeof(pucDateStr): maximum size of buffer
         // - "%d/%m/%Y": format string (day/month/year)
         // - psTimeInfo: pointer to the struct tm containing UTC time
-        strftime(pucDateStr,
+        strftime((char *)pucDateStr,
                     sizeof(pucDateStr), 
                     "%d/%m/%Y", 
-                    psTimeInfo);
-
-        
+                    psTimeInfo);  
 
         printf("%s\n", pucLabel);
         printf("---------------------------\n");
         printf("Time : %s\n", pucTimeStr);
         printf("Date : %s\n\n", pucDateStr);
-
         blReturnValue = true;
-
     }
 
     return blReturnValue;
