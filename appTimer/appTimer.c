@@ -45,22 +45,22 @@ bool appTimerPrintTimeZone(int32 lRawTime,
                            const uint8* pucLabel)
 {
     uint8 pucTimeStr[MAX_TIMESTRING_SIZE] = { 0 };
-    uint8 pucDateStr[MAX_DATESTRING_SIZE] = { 0 };    
+    uint8 pucDateStr[MAX_DATESTRING_SIZE] = { 0 };
+    struct tm* psTimeInfo = NULL;    
     bool blReturnValue = false;
 
     // Validate arguments
-    if (!(lRawTime <= 0 || 
-        pucLabel == NULL ||
-        lOffsetHours < -12 ||
-        lOffsetHours > 14 ||
-        ulOffsetMinutes < 0 ||
-        ulOffsetMinutes > 59))
+    if (lRawTime > 0 && 
+        pucLabel != NULL &&
+        lOffsetHours >= -12 &&
+        lOffsetHours <= 14 &&
+        ulOffsetMinutes <= 59)
     {
         // Adjust time by offset
         lRawTime += lOffsetHours * 3600 + ulOffsetMinutes * 60;
         // Convert the adjusted raw time (epoch seconds) into a UTC time structure.
         // gmtime() returns a pointer to a statically allocated struct tm.
-        struct tm* psTimeInfo = gmtime(&lRawTime); 
+        psTimeInfo = gmtime(&lRawTime); 
         
         // Format the time portion (hours, minutes, seconds, AM/PM) into a string.
         // - pucTimeStr: destination buffer
@@ -106,7 +106,7 @@ bool appTimerPrintUtcTime(int32 lRawTime)
     struct tm* psUtcTimeInfo = NULL;
 
     // Validate raw time
-    if (!(lRawTime <= 0)) 
+    if (lRawTime > 0) 
     {
         // Convert to UTC time 
         psUtcTimeInfo = gmtime(&lRawTime);

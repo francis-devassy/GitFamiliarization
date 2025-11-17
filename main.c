@@ -11,9 +11,15 @@
 //
 //*****************************************************************************
 //******************************* Include Files *******************************
+#ifdef _WIN32
+#include <windows.h>
+#define SLEEP(seconds) Sleep((seconds) * MS_PER_SECOND)   
+#else
+#include <unistd.h>
+#define SLEEP(seconds) sleep(seconds)                     
+#endif
 #include <stdio.h>
 #include <time.h>
-#include <unistd.h>
 #include "appTimer.h"
 #include "customTypes.h"
 
@@ -25,6 +31,7 @@
 #define OFFSET_HOURS_PST        (-8)
 #define OFFSET_MINUTES_PST      (0)
 #define WAIT_TIME               (1)
+#define MS_PER_SECOND           (1000)
 #define LABEL_IST               "IST (+5:30)"
 #define LABEL_PST               "PST (-8:00)"
 
@@ -54,7 +61,7 @@ int main(void)
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, 
                               (const uint8*)LABEL_PST);
         // Refresh every second
-        sleep(WAIT_TIME); 
+        SLEEP(WAIT_TIME); 
     }
     return 0;
 }
