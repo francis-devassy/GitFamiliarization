@@ -24,13 +24,13 @@
  
 //**************************** Forward Declarations *************************** 
 // Function to print time in a given timezone offset
-bool appTimerPrintTimeZone(int32 lRawTime, 
+bool appTimerPrintTimeZone(time_t lRawTime, 
                            int32 lOffsetHours,
                            uint32 ulOffsetMinutes, 
                            const uint8* pucLabel);
 
 // Function to display UTC time with epoch
-bool appTimerPrintUtcTime(int32 lRawTime);
+bool appTimerPrintUtcTime(time_t lRawTime);
 
 //Function to display LED status
 bool DisplayToggledLedStatus(bool blLedStatus);
