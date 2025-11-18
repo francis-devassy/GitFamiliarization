@@ -100,7 +100,7 @@ static bool printTimeZoneInfo(const uint8* pucLabel,
 //Return  : bool – false if input validation failed.
 //Notes   : Prints the system time adjusted to a given time zone offset.
 //******************************************************************************
-bool appTimerPrintTimeZone(int32 lRawTime, int32 lOffsetHours,
+bool appTimerPrintTimeZone(time_t lRawTime, int32 lOffsetHours,
                            uint32 ulOffsetMinutes, const uint8* pucLabel)
 {
     uint8 pucTimeStr[MAX_TIMESTRING_SIZE] = { 0 };
@@ -111,10 +111,10 @@ bool appTimerPrintTimeZone(int32 lRawTime, int32 lOffsetHours,
     if (lRawTime > 0 && pucLabel != NULL && lOffsetHours >= -12 &&
         lOffsetHours <= 14 && ulOffsetMinutes <= 59)
     {
-        //Adjust time by offset
         lRawTime += lOffsetHours * 3600 + ulOffsetMinutes * 60;
         //Convert the adjusted raw time (epoch seconds) into a UTC time 
-        psTimeInfo = gmtime(&lRawTime);         
+        psTimeInfo = gmtime(&lRawTime);   
+		
         //Format the time portion (hours, minutes, seconds, AM/PM) into 
         strftime((char *)pucTimeStr, sizeof(pucTimeStr),
                     "%I:%M:%S %p", psTimeInfo);
@@ -134,7 +134,7 @@ bool appTimerPrintTimeZone(int32 lRawTime, int32 lOffsetHours,
 //Return  : bool – true if printing succeeded, false if input validation failed.
 //Notes   : Prints the system time in UTC format along with the epoch value.
 //******************************************************************************
-bool appTimerPrintUtcTime(int32 lRawTime)
+bool appTimerPrintUtcTime(time_t lRawTime)
 {
     char pucTimeStr[MAX_TIMESTRING_SIZE] = { 0 };
     char pucDateStr[MAX_DATESTRING_SIZE] = { 0 };
@@ -146,11 +146,13 @@ bool appTimerPrintUtcTime(int32 lRawTime)
     {
         //Convert to UTC time 
         psUtcTimeInfo = gmtime(&lRawTime);
-        //Format time and date
+		
+        // //Format time and date
         strftime(pucTimeStr, sizeof(pucTimeStr), "%I:%M:%S %p",
                 psUtcTimeInfo);
         strftime(pucDateStr, sizeof(pucDateStr), "%d/%m/%Y",
                 psUtcTimeInfo);
+
         //Print results
         printf("UTC (0:00)\n");
         printf("---------------------------\n");
