@@ -32,5 +32,8 @@ bool appTimerPrintTimeZone(int32 lRawTime,
 // Function to display UTC time with epoch
 bool appTimerPrintUtcTime(int32 lRawTime);
 
+//Function to display LED status
+bool DisplayToggledLedStatus(bool blLedStatus);
+
 #endif // _APPTIMER_H_
 // EOF 

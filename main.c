@@ -32,8 +32,8 @@
 #define OFFSET_MINUTES_PST      (0)
 #define WAIT_TIME               (1)
 #define MS_PER_SECOND           (1000)
-#define LABEL_IST               "IST (+5:30)"
-#define LABEL_PST               "PST (-8:00)"
+#define LABEL_IST                     "IST (+5:30)"
+#define LABEL_PST                     "PST (-8:00)"
 
 //***************************** Local Variables *******************************
 
@@ -45,15 +45,19 @@
 //Outputs : None
 //Return  : return 0 at time of successfull execution
 //Notes   : Main function print Hello World and System Time
-//********************************************************************************** 
+//******************************************************************************
 int main(void) 
 {
     time_t lRawTime = 0;
+	bool blLedStatus = false;
     printf(" Hello, World!\n");
 
     while (1) 
     {
-        time(&lRawTime); 
+        //Toggle and display LED status every 1 second
+		blLedStatus = DisplayToggledLedStatus(blLedStatus);
+
+		time(&lRawTime); 
         // Print time
         appTimerPrintUtcTime(lRawTime);        
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_IST, OFFSET_MINUTES_IST, 

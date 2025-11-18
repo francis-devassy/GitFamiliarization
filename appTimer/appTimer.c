@@ -21,12 +21,43 @@
 //******************************* Local Types ********************************* 
 #define MAX_TIMESTRING_SIZE (20)
 #define MAX_DATESTRING_SIZE (20)
+#define MESSAGE_LED_ON                "LED ON"
+#define MESSAGE_LED_OFF               "LED OFF"
  
 //***************************** Local Constants ******************************* 
  
 //***************************** Local Variables ******************************* 
  
 //****************************** Local Functions ****************************** 
+//******************************.FUNCTION_HEADER.*******************************
+//Purpose : Display the received LED status and then toggle it.
+//Inputs  : blLedStatus (bool) – LED status.
+//Outputs : None (prints LED status directly to stdout).
+//Return  : bool – true if toggled LED status is true.
+//Return  : bool – false if toggled LED status is false.
+//Notes   : Prints the system time in UTC format along with the epoch value.
+//******************************************************************************
+bool DisplayToggledLedStatus(bool blLedStatus)
+{
+	if(blLedStatus == 0 || blLedStatus ==1)
+	{
+		if(blLedStatus == 0 )
+		{
+			printf("%s\n\n",MESSAGE_LED_OFF);
+			blLedStatus = 1;
+		}
+		else
+		{
+			printf("%s\n\n",MESSAGE_LED_ON);
+			blLedStatus = 0;
+		}		
+		
+	}
+	
+	return blLedStatus;
+
+}
+
 //******************************.FUNCTION_HEADER.*******************************
 //Purpose : Prints a formatted time zone label, time string, and date string.
 //Inputs  : pucLabel     (const uint8*) – Label describing the time zone.
