@@ -4,8 +4,8 @@
 //*****************************************************************************
 //
 // File    : main.c
-// Summary : Program to prints the message Hello World and System Time
-// Note    : Program to prints the message Hello World and System Time
+// Summary : Program to print system time and blink LED
+// Note    : Print time in GMT, IST and PST formats
 // Author  : Francis V D
 // Date    : 02-12-2025
 //

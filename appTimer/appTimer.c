@@ -59,7 +59,7 @@ bool DisplayToggledLedStatus(bool blLedStatus)
     }
 	else
 	{
-        digitalWrite(LED_PIN, LOW);
+		digitalWrite(LED_PIN, LOW);
         printf("%s\n\n", MESSAGE_LED_OFF);
         usleep(LED_OFF_TIME_US);
         blLedStatus = false;
