@@ -4,10 +4,10 @@
 //***************************************************************************** 
 // 
 // File    : appTimer.c
-// Summary : Program to print system time
+// Summary : Program to print system time and blink LED
 // Note    : Print time in GMT, IST and PST formats
 // Author  : Francis V D
-// Date    : 13-11-2025
+// Date    : 02-12-2025
 // 
 //***************************************************************************** 
  
@@ -16,6 +16,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+#ifdef RPI_BUILD
+#include <wiringPi.h>
+#endif
 #include "appTimer.h"
 #include "customTypes.h"
 //******************************* Local Types ********************************* 
@@ -23,12 +26,16 @@
 #define MAX_DATESTRING_SIZE (20)
 #define MESSAGE_LED_ON                "LED ON"
 #define MESSAGE_LED_OFF               "LED OFF"
- 
+#define LED_ON_TIME_US      (840000)
+#define LED_OFF_TIME_US     (532000)
+
+
 //***************************** Local Constants ******************************* 
  
 //***************************** Local Variables ******************************* 
  
 //****************************** Local Functions ****************************** 
+
 //******************************.FUNCTION_HEADER.*******************************
 //Purpose : Display the received LED status and then toggle it.
 //Inputs  : blLedStatus (bool) – LED status.
@@ -39,24 +46,44 @@
 //******************************************************************************
 bool DisplayToggledLedStatus(bool blLedStatus)
 {
-	if(blLedStatus == 0 || blLedStatus ==1)
+#ifdef RPI_BUILD
+	wiringPiSetup();
+	pinMode(LED_PIN, OUTPUT);
+	
+    if (!blLedStatus)
 	{
-		if(blLedStatus == 0 )
+        digitalWrite(LED_PIN, HIGH);
+        printf("%s\n\n", MESSAGE_LED_ON);
+        usleep(LED_ON_TIME_US);
+        blLedStatus = true;
+    }
+	else
+	{
+        digitalWrite(LED_PIN, LOW);
+        printf("%s\n\n", MESSAGE_LED_OFF);
+        usleep(LED_OFF_TIME_US);
+        blLedStatus = false;
+    }
+#else
+    if (blLedStatus == 0 || blLedStatus == 1)
+	 {
+        if (blLedStatus == 0)
 		{
-			printf("%s\n\n",MESSAGE_LED_OFF);
-			blLedStatus = 1;
-		}
+            printf("%s\n\n", MESSAGE_LED_OFF);
+            blLedStatus = 1;
+            usleep(LED_OFF_TIME_US);
+		} 
 		else
 		{
-			printf("%s\n\n",MESSAGE_LED_ON);
-			blLedStatus = 0;
-		}		
-		
-	}
-	
-	return blLedStatus;
-
+            printf("%s\n\n", MESSAGE_LED_ON);
+            blLedStatus = 0;
+            usleep(LED_ON_TIME_US);
+        }
+    }
+#endif
+    return blLedStatus;
 }
+
 
 //******************************.FUNCTION_HEADER.*******************************
 //Purpose : Prints a formatted time zone label, time string, and date string.

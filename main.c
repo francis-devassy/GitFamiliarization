@@ -7,7 +7,7 @@
 // Summary : Program to prints the message Hello World and System Time
 // Note    : Program to prints the message Hello World and System Time
 // Author  : Francis V D
-// Date    : 13-11-2025
+// Date    : 02-12-2025
 //
 //*****************************************************************************
 //******************************* Include Files *******************************
@@ -65,7 +65,7 @@ int main(void)
         appTimerPrintTimeZone(lRawTime, OFFSET_HOURS_PST, OFFSET_MINUTES_PST, 
                               (const uint8*)LABEL_PST);
         // Refresh every second
-        SLEEP(WAIT_TIME); 
+        //SLEEP(WAIT_TIME); 
     }
     return 0;
 }

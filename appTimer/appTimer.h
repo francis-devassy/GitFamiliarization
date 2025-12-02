@@ -3,7 +3,7 @@
 //  All Rights Reserved 
 //***************************************************************************** 
 // 
-// Summary : Program to print system time
+// Summary : Program to print system time and blink LED
 // Note    : Print time in GMT, IST and PST formats 
 // 
 //***************************************************************************** 
@@ -19,7 +19,10 @@
 //******************************* Global Types ******************************** 
  
 //***************************** Global Constants ****************************** 
- 
+#ifdef RPI_BUILD
+#define LED_PIN (0)
+#endif
+
 //***************************** Global Variables ****************************** 
  
 //**************************** Forward Declarations *************************** 
