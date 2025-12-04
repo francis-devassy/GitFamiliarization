@@ -12,6 +12,7 @@
 //***************************************************************************** 
  
 //******************************* Include Files ******************************* 
+#define _XOPEN_SOURCE 600
 #include <stdbool.h> 
 #include <stdio.h>
 #include <time.h>
@@ -65,8 +66,6 @@ bool DisplayToggledLedStatus(bool blLedStatus)
         blLedStatus = false;
     }
 #else
-    if (blLedStatus == 0 || blLedStatus == 1)
-	 {
         if (blLedStatus == 0)
 		{
             printf("%s\n\n", MESSAGE_LED_OFF);
@@ -79,7 +78,6 @@ bool DisplayToggledLedStatus(bool blLedStatus)
             blLedStatus = 0;
             usleep(LED_ON_TIME_US);
         }
-    }
 #endif
     return blLedStatus;
 }
